@@ -46,6 +46,11 @@
                 {{-- Actions --}}
                 <div class="flex items-center gap-3 text-sm">
                     @auth
+                        <a href="{{ route('explore') }}"
+                        class="px-3 py-1 rounded-full text-xs font-medium text-slate-700 hover:bg-slate-100">
+                            Explore
+                        </a>
+
                         <a href="{{ route('profile.show', auth()->user()) }}"
                            class="px-3 py-1 rounded-full text-xs font-medium text-slate-700 hover:bg-slate-100">
                             Profil

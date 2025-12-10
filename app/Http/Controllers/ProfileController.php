@@ -35,6 +35,17 @@ class ProfileController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
+        // Daftar followers & following
+        $followers = Follow::with('follower')
+            ->where('following_id', $user->id)
+            ->orderByDesc('id')
+            ->get();
+
+        $following = Follow::with('following')
+            ->where('follower_id', $user->id)
+            ->orderByDesc('id')
+            ->get();
+
         return view('profile.show', [
             'user'           => $user,
             'followersCount' => $followersCount,
@@ -42,6 +53,8 @@ class ProfileController extends Controller
             'posts'          => $posts,
             'isOwnProfile'   => $isOwnProfile,
             'followRelation' => $followRelation,
+            'followers'      => $followers,
+            'following'      => $following,
         ]);
     }
 

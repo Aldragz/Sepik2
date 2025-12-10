@@ -48,10 +48,28 @@
             </div>
 
             <div class="flex items-center gap-6 text-sm">
-                <span><strong>{{ $posts->total() }}</strong> postingan</span>
-                <span><strong>{{ $followersCount }}</strong> pengikut</span>
-                <span><strong>{{ $followingCount }}</strong> mengikuti</span>
-            </div>
+            <span>
+                <strong>{{ $posts->total() }}</strong> postingan
+            </span>
+
+            <button type="button"
+                    onclick="openFollowModal('followers')"
+                    class="focus:outline-none">
+                <strong class="underline underline-offset-2 cursor-pointer hover:text-pink-500">
+                    {{ $followersCount }}
+                </strong>
+                <span> pengikut</span>
+            </button>
+
+            <button type="button"
+                    onclick="openFollowModal('following')"
+                    class="focus:outline-none">
+                <strong class="underline underline-offset-2 cursor-pointer hover:text-pink-500">
+                    {{ $followingCount }}
+                </strong>
+                <span> mengikuti</span>
+            </button>
+        </div>
 
             <div class="mt-3">
                 <p class="font-semibold text-sm">{{ $user->name }}</p>
@@ -68,7 +86,6 @@
     </div>
 </div>
 
-
 {{-- Grid postingan --}}
 <div class="bg-white rounded-xl shadow p-5">
     @if ($posts->count() === 0)
@@ -79,7 +96,7 @@
         <h2 class="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-4">
             Postingan
         </h2>
-
+        
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             @foreach ($posts as $post)
                 @php
@@ -127,5 +144,140 @@
         </div>
     @endif
 </div>
+
+{{-- MODAL PENGIKUT --}}
+<div id="followersModal"
+     class="fixed inset-0 z-40 hidden bg-black/40">
+    <div class="mx-4 md:mx-auto max-w-md bg-white rounded-xl shadow-xl mt-24 md:mt-32 overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+            <h3 class="text-sm font-semibold text-slate-800">
+                Pengikut ({{ $followersCount }})
+            </h3>
+            <button type="button"
+                    onclick="closeFollowModal('followers')"
+                    class="text-slate-400 hover:text-slate-600 text-lg leading-none">
+                ×
+            </button>
+        </div>
+
+        <div class="max-h-80 overflow-y-auto">
+            @forelse ($followers as $follow)
+                @php $u = $follow->follower; @endphp
+                @if ($u)
+                    <a href="{{ route('profile.show', $u) }}"
+                       class="flex items-center gap-3 px-4 py-2 hover:bg-slate-50 transition">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center">
+                            @if ($u->avatar)
+                                <img src="{{ asset('storage/' . $u->avatar) }}"
+                                     alt="Avatar"
+                                     class="w-full h-full object-cover">
+                            @else
+                                <span class="text-xs font-semibold text-slate-600">
+                                    {{ strtoupper(substr($u->username, 0, 1)) }}
+                                </span>
+                            @endif
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-slate-800">
+                                {{ $u->username }}
+                            </p>
+                            <p class="text-xs text-slate-500">
+                                {{ $u->name }}
+                            </p>
+                        </div>
+                    </a>
+                @endif
+            @empty
+                <p class="px-4 py-4 text-xs text-slate-500">
+                    Belum ada yang mengikuti akun ini.
+                </p>
+            @endforelse
+        </div>
+    </div>
+</div>
+
+{{-- MODAL MENGIKUTI --}}
+<div id="followingModal"
+     class="fixed inset-0 z-40 hidden bg-black/40">
+    <div class="mx-4 md:mx-auto max-w-md bg-white rounded-xl shadow-xl mt-24 md:mt-32 overflow-hidden flex flex-col">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+            <h3 class="text-sm font-semibold text-slate-800">
+                Mengikuti ({{ $followingCount }})
+            </h3>
+            <button type="button"
+                    onclick="closeFollowModal('following')"
+                    class="text-slate-400 hover:text-slate-600 text-lg leading-none">
+                ×
+            </button>
+        </div>
+
+        <div class="max-h-80 overflow-y-auto">
+            @forelse ($following as $follow)
+                @php $u = $follow->following; @endphp
+                @if ($u)
+                    <a href="{{ route('profile.show', $u) }}"
+                       class="flex items-center gap-3 px-4 py-2 hover:bg-slate-50 transition">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center">
+                            @if ($u->avatar)
+                                <img src="{{ asset('storage/' . $u->avatar) }}"
+                                     alt="Avatar"
+                                     class="w-full h-full object-cover">
+                            @else
+                                <span class="text-xs font-semibold text-slate-600">
+                                    {{ strtoupper(substr($u->username, 0, 1)) }}
+                                </span>
+                            @endif
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-slate-800">
+                                {{ $u->username }}
+                            </p>
+                            <p class="text-xs text-slate-500">
+                                {{ $u->name }}
+                            </p>
+                        </div>
+                    </a>
+                @endif
+            @empty
+                <p class="px-4 py-4 text-xs text-slate-500">
+                    Akun ini belum mengikuti siapa pun.
+                </p>
+            @endforelse
+        </div>
+    </div>
+</div>
+@push('scripts')
+<script>
+    function openFollowModal(type) {
+        const id = type === 'followers' ? 'followersModal' : 'followingModal';
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        el.classList.remove('hidden');
+    }
+
+    function closeFollowModal(type) {
+        const id = type === 'followers' ? 'followersModal' : 'followingModal';
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        el.classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ['followersModal', 'followingModal'].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            // klik background (area gelap) untuk menutup
+            el.addEventListener('click', function (e) {
+                if (e.target === el) {
+                    el.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
+@endpush
 
 @endsection

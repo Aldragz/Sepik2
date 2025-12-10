@@ -31,7 +31,15 @@
                         <a href="{{ route('profile.show', $u) }}"
                            class="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-slate-50 transition">
                             <div class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-700">
-                                {{ strtoupper(substr($u->username, 0, 1)) }}
+                                @if ($u->avatar)
+                                    <img src="{{ asset('storage/' . $u->avatar) }}"
+                                        alt="Avatar"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    <span class="text-xs font-semibold text-slate-700">
+                                        {{ strtoupper(substr($u->username, 0, 1)) }}
+                                    </span>
+                                @endif
                             </div>
                             <div>
                                 <p class="text-sm font-semibold text-slate-800">

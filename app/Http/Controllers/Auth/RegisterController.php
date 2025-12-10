@@ -39,7 +39,6 @@ class RegisterController extends Controller
             'phone'      => null,
             'gender'     => null,
             'avatar'     => null,
-            'is_private' => false,
         ]);
 
         Auth::login($user);
