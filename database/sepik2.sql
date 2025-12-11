@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2025 at 09:06 AM
+-- Generation Time: Dec 11, 2025 at 05:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -148,7 +148,7 @@ CREATE TABLE `follows` (
 
 INSERT INTO `follows` (`id`, `follower_id`, `following_id`, `status`, `created_at`) VALUES
 (3, 2, 1, 'pending', '2025-12-04 14:49:10'),
-(4, 1, 2, 'accepted', '2025-12-04 15:02:09');
+(5, 1, 2, 'accepted', '2025-12-09 06:42:04');
 
 -- --------------------------------------------------------
 
@@ -252,7 +252,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2025_12_04_125242_create_saved_posts_table', 1),
 (17, '2025_12_04_125243_create_hashtags_table', 1),
 (18, '2025_12_04_125243_create_post_hashtags_table', 1),
-(19, '2025_12_04_150048_remove_is_private_from_users_table', 2);
+(19, '2025_12_04_150048_remove_is_private_from_users_table', 2),
+(20, '2025_12_10_132700_add_role_to_users_table', 3);
 
 -- --------------------------------------------------------
 
@@ -292,9 +293,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `caption`, `location`, `like_count`, `comment_count`, `created_at`, `updated_at`) VALUES
-(1, 1, 'halo guys', 'bekasi', 1, 2, '2025-12-04 06:35:15', '2025-12-04 08:57:55'),
-(2, 2, 'mantap cuy', 'jakarta', 0, 0, '2025-12-04 06:44:53', '2025-12-04 07:18:49'),
-(3, 1, 'cimhuyyyy', 'bumi', 0, 0, '2025-12-04 07:00:26', '2025-12-04 08:19:57');
+(1, 1, 'halo guys!!!', 'bekasi', 2, 4, '2025-12-04 06:35:15', '2025-12-11 08:58:48'),
+(2, 2, 'mantap coy!!', 'jakarta', 1, 1, '2025-12-04 06:44:53', '2025-12-11 08:02:38');
 
 -- --------------------------------------------------------
 
@@ -326,7 +326,8 @@ CREATE TABLE `post_likes` (
 --
 
 INSERT INTO `post_likes` (`id`, `post_id`, `user_id`, `created_at`) VALUES
-(1, 1, 2, '2025-12-04 13:45:01');
+(1, 1, 2, '2025-12-04 13:45:01'),
+(9, 2, 1, '2025-12-11 14:21:07');
 
 -- --------------------------------------------------------
 
@@ -351,8 +352,7 @@ CREATE TABLE `post_media` (
 
 INSERT INTO `post_media` (`id`, `post_id`, `media_type`, `file_path`, `thumbnail_path`, `position`, `created_at`, `updated_at`) VALUES
 (1, 1, 'image', 'posts/BvPoxZqfigiYjulqTh3KmM5LtRfkqKVqSvqsKsUz.jpg', NULL, 1, '2025-12-04 06:35:15', '2025-12-04 06:35:15'),
-(2, 2, 'image', 'posts/BnjhnqsXZquqxRYhw8Anuh96InWe6dAZ07aYLPA7.jpg', NULL, 1, '2025-12-04 06:44:53', '2025-12-04 06:44:53'),
-(3, 3, 'image', 'posts/2FiJhUq3svT0LhTO0svgTamXD6vjREZH9yFP9goK.png', NULL, 1, '2025-12-04 07:00:26', '2025-12-04 07:00:26');
+(2, 2, 'image', 'posts/BnjhnqsXZquqxRYhw8Anuh96InWe6dAZ07aYLPA7.jpg', NULL, 1, '2025-12-04 06:44:53', '2025-12-04 06:44:53');
 
 -- --------------------------------------------------------
 
@@ -414,6 +414,7 @@ CREATE TABLE `users` (
   `phone` varchar(20) DEFAULT NULL,
   `gender` enum('male','female','other') DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -423,9 +424,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `bio`, `website`, `phone`, `gender`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Kevin Saputra', 'Kevin', 'kevin@gmail.com', NULL, '$2y$12$4iAZEVc03R9OoqxHRpV8L.w3h022n3myust002RruarTBXBOTSRgu', 'bebas apa aja', NULL, '081385469991', 'male', 'avatars/Lyp80wHfLNkyuMGujmcYa63hGLOVLTShbWwzyzp6.png', 'T1JTUbwAiXUU90DXrrx3WbZMdoeFlydzQ8KmJBWR1f01Pjz8gDwTPWCnw4sY', '2025-12-04 06:26:46', '2025-12-04 09:09:07'),
-(2, 'Bagas PHU', 'Bagas', 'bagas@gmail.com', NULL, '$2y$12$Hf5YUqa4NCW81KOCw8SbMeTWmJq6Fk4Dev.3XSgzTx10Pnjc1fRsG', ':)', NULL, '085112345678', 'male', 'avatars/w6IJfsmdZC9z4txCTAK7CrODBn5Y8M6K3st8ylxN.jpg', NULL, '2025-12-04 06:36:29', '2025-12-04 09:20:37');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `bio`, `website`, `phone`, `gender`, `avatar`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Kevin Saputra', 'Kevin', 'kevin@gmail.com', NULL, '$2y$12$4iAZEVc03R9OoqxHRpV8L.w3h022n3myust002RruarTBXBOTSRgu', 'bebas apa aja', NULL, '081385469991', 'male', 'avatars/Lyp80wHfLNkyuMGujmcYa63hGLOVLTShbWwzyzp6.png', 'user', 'Q9wOrAK7sBYreTRwvr0SGI6GMSvSJLvMjt2nAr4XZSEbk2JdQHTFGC9dSEIC', '2025-12-04 06:26:46', '2025-12-04 09:09:07'),
+(2, 'Bagas PHU', 'Bagas', 'bagas@gmail.com', NULL, '$2y$12$Hf5YUqa4NCW81KOCw8SbMeTWmJq6Fk4Dev.3XSgzTx10Pnjc1fRsG', ':)', NULL, '085112345678', 'male', 'avatars/w6IJfsmdZC9z4txCTAK7CrODBn5Y8M6K3st8ylxN.jpg', 'user', NULL, '2025-12-04 06:36:29', '2025-12-11 06:12:00'),
+(4, 'Admin', 'Admin', 'admin@google.com', NULL, '$2y$12$v5rZifbOOu3FLzVQJDs78umOiCRQnUt6xYanjg2w5VI6lq3iGds3a', NULL, NULL, NULL, NULL, NULL, 'admin', NULL, '2025-12-10 06:38:41', '2025-12-10 06:38:41');
 
 --
 -- Indexes for dumped tables
@@ -602,7 +604,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comment_likes`
@@ -632,7 +634,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `hashtags`
@@ -656,7 +658,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -668,19 +670,19 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `post_media`
 --
 ALTER TABLE `post_media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `saved_posts`
@@ -704,7 +706,7 @@ ALTER TABLE `story_views`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
