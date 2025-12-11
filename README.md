@@ -1,15 +1,30 @@
-# Sepik2 🩷  
-Clone sederhana Instagram menggunakan Laravel 12 & MySQL
+# Sepik2 
 
 Sepik2 adalah aplikasi media sosial mini di mana user bisa:
 - Membuat akun, login, logout
-- Membuat postingan dengan foto/video
+- Membuat postingan dengan foto
 - Like & komentar pada postingan
 - Mengikuti (follow) user lain
-- Melihat profil dengan grid postingan
 - Mencari user dan postingan berdasarkan lokasi
 - Mengedit profil & avatar
 
+---
+
+## 🚀 Cara Menjalankan Project
+
+### Prasyarat
+
+Pastikan sudah ter-install:
+
+- PHP **8.2+**
+- Composer
+- MySQL
+
+1. Import database ( file sql bisa ditemukan di folder Database)
+2. Login dengan akun:
+3. `Username : Admin (role admin), Password : Admin123`
+4. `Username : Kevin (role user), Password : kevin123`
+5. bisa juga mendaftarkan akun baru
 ---
 
 ## 🛠 Tech Stack
@@ -74,18 +89,7 @@ Sepik2 adalah aplikasi media sosial mini di mana user bisa:
 
 ---
 
-## 🚀 Cara Menjalankan Project
-
-### 1. Prasyarat
-
-Pastikan sudah ter-install:
-
-- PHP **8.2+**
-- Composer
-- MySQL
-- Node.js & npm (untuk asset build, kalau nanti dibutuhkan)
-
-### 2. Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/Aldragz/Sepik2.git
