@@ -11,10 +11,31 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home')
     ->middleware('auth');
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        // Dashboard admin
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        // Kelola User
+        Route::get('/users', [AdminUserController::class, 'index'])
+            ->name('users');
+
+        // Hapus User
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])
+            ->name('users.delete');
+    });
+
 
 // AUTH
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
@@ -31,7 +52,7 @@ Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
@@ -39,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
     // Like / Unlike post (toggle)
     Route::post('/posts/{post}/like', [PostLikeController::class, 'toggle'])
@@ -64,4 +87,5 @@ Route::middleware('auth')->group(function () {
 
     // DETAIL POST
     Route::get('/p/{post}', [PostController::class, 'show'])->name('posts.show');
+
 });

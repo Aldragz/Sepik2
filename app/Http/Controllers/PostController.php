@@ -80,4 +80,34 @@ class PostController extends Controller
 
         return view('posts.show', compact('post', 'alreadyLiked'));
     }
-}
+
+    public function destroy(Post $post)
+    {
+        // Pastikan hanya pemilik postingan yang boleh menghapus
+        if ($post->user_id !== auth()->id()) {
+            abort(403, 'Kamu tidak punya izin untuk menghapus postingan ini.');
+        }
+
+        // Hapus semua media terkait dari storage
+        foreach ($post->media as $media) {
+            if (\Storage::exists('public/' . $media->file_path)) {
+                \Storage::delete('public/' . $media->file_path);
+            }
+            $media->delete();
+        }
+
+        // Hapus komentar terkait
+        $post->comments()->delete();
+
+        // Hapus like terkait
+        $post->likes()->delete();
+
+        // Hapus postingan
+        $post->delete();
+
+        return redirect()->route('profile.show', auth()->user())
+    ->with('success', 'Postingan berhasil dihapus.');
+
+    }
+
+    }

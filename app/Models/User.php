@@ -21,7 +21,7 @@ class User extends Authenticatable
         'phone',
         'gender',
         'avatar',
-        'is_private',
+        'role',
     ];
 
     protected $hidden = [
@@ -113,6 +113,11 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 
 }

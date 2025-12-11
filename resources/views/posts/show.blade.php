@@ -46,6 +46,17 @@
 
             <div class="text-[11px] text-gray-400 mt-1">
                 {{ $post->created_at->diffForHumans() }}
+                @if (auth()->id() === $post->user_id)
+                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                onclick="return confirm('Yakin ingin menghapus postingan ini?')"
+                                class="text-xs text-red-600 hover:text-red-800 font-semibold">
+                            Hapus Postingan
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     @else

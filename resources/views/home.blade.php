@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@if (session('success'))
+<!-- @if (session('success'))
     <div class="mb-4 bg-green-100 text-green-800 px-4 py-2 rounded">
         {{ session('success') }}
     </div>
-@endif
+@endif -->
 
 @if (session('error'))
     <div class="mb-4 bg-red-100 text-red-800 px-4 py-2 rounded">
@@ -14,38 +14,6 @@
 @endif
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    {{-- Kolom kiri: profil --}}
-    <div class="md:col-span-1">
-        <div class="bg-white rounded-lg shadow p-4">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-xl">
-                    @if ($user->avatar)
-                        <img src="{{ asset('storage/' . $user->avatar) }}"
-                            alt="Avatar"
-                            class="w-full h-full object-cover">
-                    @else
-                        <span class="text-xl font-semibold text-gray-600">
-                            {{ strtoupper(substr($user->username, 0, 1)) }}
-                        </span>
-                    @endif
-                </div>
-                <div>
-                    <p class="font-semibold">{{ $user->name }}</p>
-                    <p class="text-sm text-gray-500">{{ '@' . $user->username }}</p>
-                </div>
-            </div>
-
-            <p class="mt-3 text-sm text-gray-600">
-                {{ $user->bio ?? 'Belum ada bio.' }}
-            </p>
-
-            <a href="{{ route('posts.create') }}"
-               class="mt-4 inline-block text-sm bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">
-                + Buat Postingan
-            </a>
-        </div>
-    </div>
-
     {{-- Kolom kanan: GLOBAL FEED --}}
     <div class="md:col-span-2 space-y-4">
         @forelse ($posts as $post)
@@ -177,8 +145,14 @@
                 </div>
             </div>
         @empty
-            <div class="bg-white rounded-lg shadow p-6 text-center text-gray-500">
-                Belum ada postingan. Coba buat postingan pertama kamu!
+            <div class="bg-white rounded-lg shadow p-6 text-center text-gray-500 text-sm">
+                Timeline-mu masih kosong.
+                <br>
+                Coba ikuti beberapa akun di
+                <a href="{{ route('explore') }}" class="text-pink-500 font-semibold hover:underline">
+                    halaman Explore
+                </a>
+                atau buat postingan pertama kamu!
             </div>
         @endforelse
 
