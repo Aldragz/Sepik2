@@ -92,7 +92,17 @@
                             <span>🛠</span>
                             <span>Dashboard</span>
                         </a>
-
+                        <a href="{{ route('admin.admins.create') }}"
+                        class="flex items-center gap-3 px-4 py-2 text-sm 
+                        {{ request()->routeIs('admin.admins.*') ? 'font-semibold text-pink-500' : 'text-slate-700 hover:bg-slate-50' }}">
+                            <span>➕</span>
+                            <span>Tambah Admin</span>
+                        </a>
+                        <a href="{{ route('admin.admins.index') }}"
+                        class="flex items-center gap-3 px-4 py-2 text-sm {{ request()->routeIs('admin.Admins') ? 'font-semibold text-pink-500' : 'text-slate-700 hover:bg-slate-50' }}">
+                            <span>👥</span>
+                            <span>Kelola Admin</span>
+                        </a>
                         <a href="{{ route('admin.users') }}"
                         class="flex items-center gap-3 px-4 py-2 text-sm {{ request()->routeIs('admin.users') ? 'font-semibold text-pink-500' : 'text-slate-700 hover:bg-slate-50' }}">
                             <span>👥</span>
@@ -104,7 +114,7 @@
                             <span>🖼️</span>
                             <span>Kelola Postingan</span>
                         </a>
-                        
+
                         {{-- nanti tambah menu admin lain: Users, Posts, Reports, Settings, dst --}}
                     </nav>
                 </aside>

@@ -14,6 +14,7 @@ use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminManagementController;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home')
@@ -27,6 +28,10 @@ Route::middleware(['auth', 'admin'])
         // Dashboard admin
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
+        
+        Route::get('/admins', [AdminManagementController::class, 'index'])
+        ->name('admins.index');
+
 
         // Kelola User
         Route::get('/users', [AdminUserController::class, 'index'])
@@ -35,6 +40,16 @@ Route::middleware(['auth', 'admin'])
         // Hapus User
         Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])
             ->name('users.delete');
+
+        Route::get('/admins/create', [AdminManagementController::class, 'create'])
+            ->name('admins.create');
+
+        Route::post('/admins', [AdminManagementController::class, 'store'])
+            ->name('admins.store');
+
+        Route::delete('/admins/{admin}', [AdminManagementController::class, 'destroy'])
+        ->name('admins.delete');
+
     });
 
 
