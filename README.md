@@ -22,12 +22,12 @@ Pastikan sudah ter-install:
 
 1. Import database ( file sql bisa ditemukan di folder Database)
 2. Login dengan akun:
-   `Username : Admin (role admin)
+`- Username : Admin (role admin)
    Password : Admin123`
    atau
    `Username : Kevin (role user)
    Password : kevin123`
-3. bisa juga mendaftarkan akun baru
+4. bisa juga mendaftarkan akun baru
 ---
 
 ## 🛠 Tech Stack
