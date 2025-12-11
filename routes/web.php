@@ -12,6 +12,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('/', [HomeController::class, 'index'])
@@ -51,6 +52,13 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+    Route::get('/admin/posts/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
+    Route::put('/admin/posts/{id}', [AdminPostController::class, 'update'])->name('admin.posts.update');
+});
+
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -98,6 +98,13 @@
                             <span>👥</span>
                             <span>Kelola User</span>
                         </a>
+                        <a href="{{ route('admin.posts.index') }}"
+                        class="flex items-center gap-3 px-4 py-2 text-sm 
+                        {{ request()->routeIs('admin.posts.*') ? 'font-semibold text-pink-500' : 'text-slate-700 hover:bg-slate-50' }}">
+                            <span>🖼️</span>
+                            <span>Kelola Postingan</span>
+                        </a>
+                        
                         {{-- nanti tambah menu admin lain: Users, Posts, Reports, Settings, dst --}}
                     </nav>
                 </aside>
