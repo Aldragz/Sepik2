@@ -1,4 +1,4 @@
-# Sepik2 
+# Sepik2 Using Laravel 12
 
 Sepik2 adalah aplikasi media sosial mini di mana user bisa:
 - Membuat akun, login, logout
@@ -17,8 +17,8 @@ Sepik2 adalah aplikasi media sosial mini di mana user bisa:
 Pastikan sudah ter-install:
 
 - PHP **8.2+**
-- Composer
-- MySQL
+- Composer version 2.8.9
+- Laravel
 
 Download .zip atau
 Clone Repository:
