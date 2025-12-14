@@ -20,6 +20,7 @@ Pastikan sudah ter-install:
 - Composer
 - MySQL
 
+Download .zip atau
 Clone Repository:
 `git clone https://github.com/Aldragz/Sepik2.git`
 `cd Sepik2 `
