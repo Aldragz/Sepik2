@@ -26,10 +26,19 @@ Clone Repository:
 
 1. Import database ( file sql bisa ditemukan di folder Database)
 2. Rename file `.env.example` menjadi `.env`
-3. Login dengan akun:
-4. `Username : Admin (role admin), Password : Admin123`
-5. `Username : Kevin (role user), Password : kevin123`
-6. bisa juga mendaftarkan akun baru
+3. edit DB_CONNECTION di `.env` menjadi seperti ini:
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=sepik3
+   DB_USERNAME=root
+   DB_PASSWORD=
+5. Ubah juga `SESSION_DRIVER=database` menjadi `SESSION_DRIVER=file`
+6. jalankan `php artisan migrate`
+7. Login dengan akun:
+8. `Username : Admin (role admin), Password : Admin123`
+9. `Username : Kevin (role user), Password : kevin123`
+10. bisa juga mendaftarkan akun baru
 ---
 
 ## 🛠 Tech Stack
