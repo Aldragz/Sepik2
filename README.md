@@ -31,7 +31,7 @@ Clone Repository:
    - DB_CONNECTION=mysql
    - DB_HOST=127.0.0.1
    - DB_PORT=3306
-   - DB_DATABASE=sepik3
+   - DB_DATABASE=sepik2
    - DB_USERNAME=root
    - DB_PASSWORD=
 5. Ubah juga `SESSION_DRIVER=database` menjadi `SESSION_DRIVER=file`
