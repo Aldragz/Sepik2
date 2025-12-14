@@ -35,11 +35,12 @@ Clone Repository:
    DB_PASSWORD=
 5. Ubah juga `SESSION_DRIVER=database` menjadi `SESSION_DRIVER=file`
 6. jalankan di terminal `php artisan key:generate`
-7. jalankan di terminal `php artisan serve`
-8. Login dengan akun:
-9. `Username : Admin (role admin), Password : Admin123`
-10. `Username : Kevin (role user), Password : kevin123`
-11. bisa juga mendaftarkan akun baru
+7. jalankan di terminal `php artisan storage:link` jika error pergi ke folder `/public` hapus folder `/storage` lalu jalankan perintahnya kembali.
+8. jalankan di terminal `php artisan serve`
+9. Login dengan akun:
+10. `Username : Admin (role admin), Password : Admin123`
+11. `Username : Kevin (role user), Password : kevin123`
+12. bisa juga mendaftarkan akun baru
 ---
 
 ## 🛠 Tech Stack
