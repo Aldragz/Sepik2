@@ -27,12 +27,12 @@ Clone Repository:
 1. Import database ( file sql bisa ditemukan di folder Database)
 2. Rename file `.env.example` menjadi `.env`
 3. edit DB_CONNECTION di `.env` menjadi seperti ini:
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=sepik3
-   DB_USERNAME=root
-   DB_PASSWORD=
+   - DB_CONNECTION=mysql
+   - DB_HOST=127.0.0.1
+   - DB_PORT=3306
+   - DB_DATABASE=sepik3
+   - DB_USERNAME=root
+   - DB_PASSWORD=
 5. Ubah juga `SESSION_DRIVER=database` menjadi `SESSION_DRIVER=file`
 6. jalankan di terminal `php artisan key:generate`
 7. jalankan di terminal `php artisan storage:link` jika error pergi ke folder `/public` hapus folder `/storage` lalu jalankan perintahnya kembali.
