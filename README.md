@@ -20,6 +20,10 @@ Pastikan sudah ter-install:
 - Composer
 - MySQL
 
+Clone Repository:
+`git clone https://github.com/Aldragz/Sepik2.git`
+`cd Sepik2 `
+
 1. Import database ( file sql bisa ditemukan di folder Database)
 2. Login dengan akun:
 3. `Username : Admin (role admin), Password : Admin123`
@@ -93,4 +97,4 @@ Pastikan sudah ter-install:
 
 ```bash
 git clone https://github.com/Aldragz/Sepik2.git
-cd Sepik2
+cd Sepik2 
