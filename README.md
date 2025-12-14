@@ -25,10 +25,11 @@ Clone Repository:
 `cd Sepik2 `
 
 1. Import database ( file sql bisa ditemukan di folder Database)
-2. Login dengan akun:
-3. `Username : Admin (role admin), Password : Admin123`
-4. `Username : Kevin (role user), Password : kevin123`
-5. bisa juga mendaftarkan akun baru
+2. Rename file `.env.example` menjadi `.env`
+3. Login dengan akun:
+4. `Username : Admin (role admin), Password : Admin123`
+5. `Username : Kevin (role user), Password : kevin123`
+6. bisa juga mendaftarkan akun baru
 ---
 
 ## 🛠 Tech Stack
